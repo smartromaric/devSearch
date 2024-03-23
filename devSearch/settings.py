@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 
 from dotenv import dotenv_values
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -83,10 +84,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'devSearch',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': '5432',
         'USER': 'postgres',
-        'PASSWORD': ENV['DB_PASS']
+        'PASSWORD': os.getenv('DB_PASS')
     }
 }
 
