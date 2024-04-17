@@ -14,7 +14,7 @@ from pathlib import Path
 
 from dotenv import dotenv_values
 import os
-
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -97,17 +97,21 @@ WSGI_APPLICATION = 'devSearch.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'db_biln',
+#         'HOST': 'dpg-coft87fsc6pc7381cq50-a',
+#         'PORT': '5432',
+#         'USER': 'smart',
+#         'PASSWORD': os.getenv('DB_PASS'),
+#             # os.getenv('DB_PASS')
+#     }
+# }
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db_biln',
-        'HOST': 'dpg-coft87fsc6pc7381cq50-a',
-        'PORT': '5432',
-        'USER': 'smart',
-        'PASSWORD': os.getenv('DB_PASS'),
-            # os.getenv('DB_PASS')
-    }
-}
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))}
+
+print(os.environ.get("DATABASE_URL"))
 
 
 # Password validation
