@@ -15,6 +15,7 @@ from pathlib import Path
 from dotenv import dotenv_values
 import os
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -29,7 +30,7 @@ SECRET_KEY = 'django-insecure-)06m1o(breobcik6_t1jn$%b0&oxv!a8_=2(6ra4fix0@ep-=m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -53,7 +55,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+# # Définissez le backend de stockage pour les fichiers media sur le stockage par défaut de Django
+# DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
 ROOT_URLCONF = 'devSearch.urls'
 
@@ -80,16 +88,26 @@ WSGI_APPLICATION = 'devSearch.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'devSearch',
-        'HOST': 'db',
-        'PORT': '5432',
-        'USER': 'postgres',
-        'PASSWORD': os.getenv('DB_PASS')
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'devSearch',
+#         'HOST': 'db',
+#         'PORT': '5432',
+#         'USER': 'postgres',
+#         'PASSWORD': os.getenv('DB_PASS'),
+#             # os.getenv('DB_PASS')
+#     }
+# }
 
 
 # Password validation
@@ -137,13 +155,23 @@ EMAIL_HOST_PASSWORD = ENV['EMAIL_PASS']
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'statics',
+# ]
 
+STATIC_ROOT = os.path.join(BASE_DIR, "statics")
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
+
+
+# STATIC_URL = '/static/'
+# MEDIA_URL = "/media/"
+
+# STATICFILES_DIRS =[os.path.join(BASE_DIR, "templates"),]
+
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
