@@ -90,24 +90,24 @@ WSGI_APPLICATION = 'devSearch.wsgi.application'
 
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'devSearch',
-#         'HOST': 'db',
-#         'PORT': '5432',
-#         'USER': 'postgres',
-#         'PASSWORD': os.getenv('DB_PASS'),
-#             # os.getenv('DB_PASS')
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'db_biln',
+        'HOST': 'dpg-coft87fsc6pc7381cq50-a',
+        'PORT': '5432',
+        'USER': 'smart',
+        'PASSWORD': os.getenv('DB_PASS'),
+            # os.getenv('DB_PASS')
+    }
+}
 
 
 # Password validation
@@ -143,12 +143,12 @@ USE_L10N = True
 USE_TZ = True
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = ENV['EMAIL']
-EMAIL_HOST_PASSWORD = ENV['EMAIL_PASS']
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = ENV['EMAIL']
+# EMAIL_HOST_PASSWORD = ENV['EMAIL_PASS']
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
