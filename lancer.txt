@@ -1,0 +1,31 @@
+@echo off
+
+REM Détecter le chemin du script actuel
+set SCRIPT_DIR=%~dp0
+
+REM Nom de l'environnement virtuel
+set VENV_NAME=myenv
+
+REM Construire le chemin du répertoire de l'environnement virtuel
+set VENV_DIR=%SCRIPT_DIR%\%VENV_NAME%
+
+REM Créer un environnement virtuel
+python -m venv %VENV_DIR%
+
+REM Activer l'environnement virtuel
+call %VENV_DIR%\Scripts\activate
+
+REM Installer les dépendances à partir du fichier requirements.txt
+pip install -r %SCRIPT_DIR%\requirements.txt
+
+REM Aller dans le répertoire du projet Django
+cd %SCRIPT_DIR%
+
+REM Lancer le projet Django
+start cmd /k python manage.py runserver
+
+REM Désactiver l'environnement virtuel lorsque vous avez terminé
+deactivate
+
+REM Maintenir la fenêtre ouverte jusqu'à ce que l'utilisateur appuie sur une touche
+pause
