@@ -12,14 +12,14 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
-from dotenv import dotenv_values
+# from dotenv import dotenv_values
 import os
 import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-ENV = dotenv_values('.env')
+# ENV = dotenv_values('.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -109,6 +109,7 @@ WSGI_APPLICATION = 'devSearch.wsgi.application'
 #             # os.getenv('DB_PASS')
 #     }
 # }
+os.environ["DATABASE_URL"]=("postgresql://devsearch_db_8o99_user:KU4poADEO57ADWJNWKtbn6gx6buh3Mux@dpg-cs5r5rd6l47c73f7c4t0-a.oregon-postgres.render.com/devsearch_db_8o99")
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))}
 
